@@ -1,0 +1,5 @@
+---
+  - hosts: all
+    tasks:
+      - name: Install tomcat server
+        yum: pkg=tomcat state=removed update_cache=true

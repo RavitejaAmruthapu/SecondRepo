@@ -1,0 +1,13 @@
+---
+  - hosts: b
+    user: teja
+    sudo: yes
+    tasks:
+      - name: Install httpd server
+        yum: pkg=httpd state=installed update_cache=true
+      - name: Waiting for port number 80
+        wait_for:
+          port: 80
+          state: started
+      - name: install FTP
+        yum: pkg=ftp state=installed

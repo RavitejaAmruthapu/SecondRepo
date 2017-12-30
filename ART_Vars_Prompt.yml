@@ -1,0 +1,17 @@
+---
+  - hosts: all
+    user: teja
+    sudo: yes
+    connection: ssh
+    gather_facts: no
+    vars:
+      control_server: 192.168.22.128
+      web_root: /var/www/html
+      myuser: root
+      updatemyfiles: 455
+    vars_prompt:
+      - name: Prompt
+        prompt: Do you want to run the below task?
+    tasks:
+      - name: Install tomcat server
+        yum: pkg=tomcat state=removed update_cache=true

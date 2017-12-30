@@ -1,0 +1,21 @@
+---
+  - hosts: all
+    user: teja
+    sudo: yes
+    tasks:
+      - file:
+          path: /home/teja/Playbooks/PlayBooks_log
+          state: directory
+          mode: 0755
+      - name: Record Playbook starting date and time
+        raw: /bin/date > /home/teja/Playbooks/PlayBooks_logPlaybooks_Start.log
+      - name: Install tomcat server
+        yum: pkg=tomcat state=latest update_cache=true
+      - name: start tomcat server
+        service: name=tomcat state=restarted
+      - name: Install httpd package
+        yum: pkg=httpd state=installed
+      - name: Record all packages in source system
+        raw: yum list installed > /home/teja/Playbooks/PlayBooks_log/allPackages.log
+      - name: Record Playbook end date and time
+        raw: /bin/date > /home/teja/Playbooks/PlayBooks_log/Playbooks_end.log

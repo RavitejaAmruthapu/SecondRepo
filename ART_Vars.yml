@@ -1,0 +1,10 @@
+---
+  - hosts: all
+    vars:
+      control_server: 192.168.22.128
+      web_root: /var/www/html
+      myuser: root
+      updatemyfiles: 455
+    tasks:
+      - name: Install tomcat server
+        yum: pkg=tomcat state=removed update_cache=true

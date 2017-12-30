@@ -1,0 +1,18 @@
+---
+  - hosts: all
+    user: teja
+    sudo: yes
+    vars_prompt:
+      - name: I_or_U
+        prompt: Install or uninstall package?
+        default: installed
+        private: no
+    tasks:
+      - name: tomcat {{ I_or_U }} server
+        yum: name=tomcat state={{ I_or_U }}
+        tags:
+          - tomcat
+      - name: httpd {{ I_or_U }} package
+        yum: pkg=httpd state={{ I_or_U }}
+        tags:
+          - httpd

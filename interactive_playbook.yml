@@ -1,0 +1,12 @@
+---
+ - hosts: all
+   user: teja
+   sudo: yes
+   vars_prmopt:
+      - name: pkgtoinstall
+        prompt: Install whch package ?
+        default: telnet
+        private: no
+   tasks:
+      - name: Install given input package
+        yum: pkg={{ pkgtoinstall }}  state=installed update_cache=true
